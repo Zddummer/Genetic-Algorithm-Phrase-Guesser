@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * 
  * @author Zach Dummer
  *
- * Last modified: Dec 23, 2018
+ * Last modified: Dec 24, 2018
  */
 public class Population {
 
@@ -15,9 +15,9 @@ public class Population {
 	private ArrayList<DNA> matingPool;
 	private float mutationRate;
 	private String target;
-	private int numGen;
+	private int numGen = 0;
 	private boolean finished= false;
-	private int perfectFit;
+	private int perfectFit = 1;
 	
 	/**
 	 * Constructor method for the population class
@@ -31,20 +31,38 @@ public class Population {
 		mutationRate = m;
 		population = new DNA[popSize];
 		
-		//TODO
+		for(int i = 0; i < population.length; i++) {
+			population[i] = new DNA(target.length());
+		}
+		calcFitnessPop();
+		matingPool = new ArrayList<DNA>();
 		
 	}
 	/**
 	 * Calculates and fills the population array with the fitness score of each DNA object
 	 */
-	public void calcFitness() {
-		//TODO
+	public void calcFitnessPop() {
+		for(int i = 0; i < population.length; i++) {
+			population[i].calcFitnessDNA(target);
+		}
 	}
 	/**
 	 * Generates the mating pool to pick the parents for the next generation
 	 */
 	public void selction() {
-		//TODO
+		
+		//make sure to clear the pool from the last generation
+		matingPool.clear();
+		
+		float maxFitness = 0;
+	    for (int i = 0; i < population.length; i++) {
+	      if (population[i].fitness > maxFitness) {
+	        maxFitness = population[i].fitness;
+	      }
+	    }
+	    
+	    //TODO need to decide how I want to add to the pool based on fitness
+	    
 	}
 	/**
 	 * Creates the next generation

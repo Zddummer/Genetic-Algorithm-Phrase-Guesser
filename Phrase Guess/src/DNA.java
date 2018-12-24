@@ -10,7 +10,7 @@
 public class DNA {
 
 	private char[] genes;
-	private float fitness;
+	float fitness;			//visible to package
 	
 	/**
 	 * Constructor method for DNA
@@ -38,7 +38,7 @@ public class DNA {
 	 * 
 	 * @param target is the target phrase
 	 */
-	public void fitness(String target) {
+	public void calcFitnessDNA(String target) {
 		int score = 0;
 		
 		for(int i = 0; i < genes.length; i++) {
