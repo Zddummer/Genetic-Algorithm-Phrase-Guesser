@@ -5,7 +5,7 @@
  * 
  * @author Zach Dummer
  *
- * Last modified: Dec 22, 2018
+ * Last modified: Dec 24, 2018
  */
 public class DNA {
 
@@ -19,8 +19,12 @@ public class DNA {
 	 */
 	public DNA(int numChar) {
 		genes = new char[numChar];
-
-		//TODO
+		String s = "abcdefghijklmnopqrstuvwxyz ";
+		
+		for(int i = 0; i < genes.length; i++) {
+			int num = (int)(Math.random() * 27);
+			genes[i] = s.charAt(num);
+		}
 	}
 	/**
 	 * 
@@ -35,7 +39,16 @@ public class DNA {
 	 * @param target is the target phrase
 	 */
 	public void fitness(String target) {
-		//TODO
+		int score = 0;
+		
+		for(int i = 0; i < genes.length; i++) {
+			if(genes[i] == target.charAt(i)) {
+				score++;
+			}
+		}
+		
+		fitness = (float)score / (float)target.length();
+		
 	}
 	/**
 	 * Crossover function takes the information from two parents DNA objects and creates a new child DNA
@@ -46,7 +59,16 @@ public class DNA {
 	public DNA crossover(DNA partner) {
 		DNA child = new DNA(genes.length);
 		
-		//TODO
+		//Also try picking a random midpoint
+		int mid = genes.length / 2;
+		
+		for(int i = 0; i < genes.length; i++) {
+			if(i > mid) {
+				child.genes[i] = genes[i];
+			} else {
+				child.genes[i] = partner.genes[i];
+			}
+		}
 		
 		return child;
 	}
@@ -58,6 +80,12 @@ public class DNA {
 	 * @param mutationRate
 	 */
 	public void mutate(float mutationRate) {
-		//TODO
+		String s = "abcdefghijklmnopqrstuvwxyz ";
+		
+		for(int i = 0; i < genes.length; i++) {
+			if((Math.random() * 1) < mutationRate) {
+				genes[i] = s.charAt((int)(Math.random() * 27));
+			}
+		}
 	}
 }
