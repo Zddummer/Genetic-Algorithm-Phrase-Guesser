@@ -15,8 +15,8 @@ public class Population {
 	private ArrayList<DNA> matingPool;
 	private float mutationRate;
 	private String target;
-	private int numGen = 0;
-	private boolean finished= false;
+	private int numGen = 1;
+	boolean finished = false;			//visible to package
 	private int perfectFit = 1;
 	
 	/**
@@ -65,10 +65,27 @@ public class Population {
 	    
 	}
 	/**
-	 * Creates the next generation
+	 * Creates the next generation by randomly selecting two parents from
+	 * the mating pool, Then crossing over their information and filling
+	 * population with the children for the next generation.
 	 */
 	public void createNextGen() {
-		//TODO
+		
+		for(int i = 0; i < population.length; i++) {
+			int randNum1 = (int)(Math.random() * (matingPool.size() - 1));
+			int randNum2 = (int)(Math.random() * (matingPool.size() - 1));
+			
+			DNA parent1 = matingPool.get(randNum1);
+			DNA parent2 = matingPool.get(randNum2);
+			
+			DNA child = parent1.crossover(parent2);
+			child.mutate(mutationRate);
+			
+			population[i] = child;
+		}
+		
+		numGen++;
+		
 	}
 	/**
 	 * Computes the DNA object with the best fitness score
@@ -76,8 +93,22 @@ public class Population {
 	 * @return String which is the closest phrase to the target
 	 */
 	public String getBest() {
-		//TODO
-		return "";
+		
+		float highestFit = 0;
+		int indexOfHighestFit = 0;
+		
+		for(int i = 0; i < population.length; i++) {
+			if(highestFit < population[i].fitness) {
+				highestFit = population[i].fitness;
+				indexOfHighestFit = i;
+			}
+		}
+		
+		if(highestFit == perfectFit) {
+			finished = true;
+		}
+		
+		return population[indexOfHighestFit].getPhrase();
 	}
 	/**
 	 * Checks to see is the target phrase has been found
@@ -101,7 +132,13 @@ public class Population {
 	 * @return float which is the average fitness
 	 */
 	public float getAvgFit() {
-		//TODO
-		return 0;
+		
+		float avgFit = 0;
+		
+		for(int i = 0; i < population.length; i++) {
+			avgFit += population[i].fitness;
+		}
+		
+		return (avgFit / population.length);
 	}
 }
