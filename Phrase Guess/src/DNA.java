@@ -5,7 +5,7 @@
  * 
  * @author Zach Dummer
  *
- * Last modified: Dec 24, 2018
+ * Last modified: Dec 25, 2018
  */
 public class DNA {
 
@@ -22,7 +22,7 @@ public class DNA {
 		String s = "abcdefghijklmnopqrstuvwxyz ";
 		
 		for(int i = 0; i < genes.length; i++) {
-			int num = (int)(Math.random() * 27);
+			int num = (int)(Math.random() * s.length());
 			genes[i] = s.charAt(num);
 		}
 	}

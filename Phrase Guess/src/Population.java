@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * 
  * @author Zach Dummer
  *
- * Last modified: Dec 24, 2018
+ * Last modified: Dec 25, 2018
  */
 public class Population {
 
@@ -16,7 +16,7 @@ public class Population {
 	private float mutationRate;
 	private String target;
 	private int numGen = 1;
-	boolean finished = false;			//visible to package
+	private boolean finished = false;
 	private int perfectFit = 1;
 	
 	/**
@@ -59,9 +59,13 @@ public class Population {
 	      if (population[i].fitness > maxFitness) {
 	        maxFitness = population[i].fitness;
 	      }
+	      int add = (int)(population[i].fitness * 100);
+	      for(int j = 0; j < add; j++) {
+	    	  matingPool.add(population[i]);
+	      }
 	    }
-	    
 	    //TODO need to decide how I want to add to the pool based on fitness
+	    
 	    
 	}
 	/**
@@ -106,6 +110,7 @@ public class Population {
 		
 		if(highestFit == perfectFit) {
 			finished = true;
+			System.out.println("The phrase " + '"' + target + '"' + " has been found");
 		}
 		
 		return population[indexOfHighestFit].getPhrase();
