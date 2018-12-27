@@ -7,7 +7,7 @@ import java.util.ArrayList;
  * 
  * @author Zach Dummer
  *
- * Last modified: Dec 25, 2018
+ * Last modified: Dec 27, 2018
  */
 public class Population {
 
@@ -59,13 +59,13 @@ public class Population {
 	      if (population[i].fitness > maxFitness) {
 	        maxFitness = population[i].fitness;
 	      }
+	      
+	      //try to add things based on total percentage
 	      int add = (int)(population[i].fitness * 100);
 	      for(int j = 0; j < add; j++) {
 	    	  matingPool.add(population[i]);
 	      }
 	    }
-	    //TODO need to decide how I want to add to the pool based on fitness
-	    
 	    
 	}
 	/**
